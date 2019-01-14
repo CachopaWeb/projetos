@@ -1,0 +1,49 @@
+<nav class="nav-extended">
+  <div class="nav-wrapper">
+  </div>
+  <div class="nav-content">
+    <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal" (click)="nova_lista = !nova_lista">
+      <i class="material-icons" (click)="addItem(itemTitulo)">add</i>
+    </a>
+  </div>
+</nav>
+<div class="card-panel" *ngIf="nova_lista">
+  <div class="row">
+    <div class="input-field col s6">
+      <input id="nome" type="text" class="validate" #nome>
+      <label for="nome" class="white-text">Escreva aqui</label>
+    </div>     
+    <div class="input-field col s6">
+      <input id="senha" type="password" class="validate" #senha>
+      <label for="senha" class="white-text">Senha</label>
+    </div>     
+    <input type="button" class="btn" value="Gravar" (click)="addLista(nome.value, senha.value)">
+  </div>  
+</div>
+<div class="card-panel">
+    <ul class="collection with-header">
+      <li class="collection-header"><h4>Listas Criadas</h4></li>  
+      <li *ngFor="let item of itens" class="collection-item">
+        <a href="#modal1" class="modal-trigger">
+          <div>
+            <span class="title">{{ item.nome }}</span>
+            <i class="material-icons secondary-content">send</i>
+          </div>
+        </a>
+      </li>
+    </ul>
+</div>
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Digite a Senha</h4>
+    <div class="input-field col s6">
+      <input id="senha_lista" type="password" class="validate" #senhaLista>
+      <label for="senha_lista" class="white-text">Senha</label>
+    </div>     
+    <input type="button" class="btn" value="Acessar" (click)="AcessoLista(senhaLista.value)">
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-close waves-effect waves-green btn-flat"><i class="material-icons">close</i></a>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="row" *ngFor="let emp of empresas">
+  <div class="col s12 m8 offset-m2 l6 offset-l3">
+      <div class="card" ng-if="emp.id != 0" id="{{emp.id}}" routerLink="/produtos/{{emp.id}}">
+          <div class="card-image">
+              <img [src]="emp.logo" class="responsive-img">
+              <!-- <span class="card-title black-text">Empresa 1</span> -->
+              <!-- <a class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a> -->
+          </div>
+          <div class="card-content">
+              <p>{{emp.nome}}</p>
+          </div>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>Meu Carrinho</h1>
+  <table>
+    <tr>
+      <th>Id</th>
+      <th>Foto</th>
+      <th>Nome</th>
+      <th>Quant</th>
+      <th>Valor Unit</th>
+      <th>Valor Total</th>
+    </tr>
+    <tr *ngFor="let x of ItensCartArray">
+      <td>{{x.produto.id}}</td>
+      <td>
+        <img [src]="x.produto.foto" alt="" width="80px" height="50px">
+      </td>
+      <td>{{x.produto.nome}}</td>
+      <td>{{x.quantidade}}</td>
+      <td>{{x.produto.valor}}</td>
+      <td>{{x.produto.valor * x.quantidade}}</td>
+    </tr>
+    <tr>
+      <blockquote>
+        <p class="red-text">R$ {{total}}</p>
+      </blockquote>
+    </tr>
+  </table>
+</div>

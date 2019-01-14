@@ -1,0 +1,17 @@
+<div class="row" *ngFor="let prod of produtos" >
+  <div class="col s12 m8 offset-m2 l6 offset-l3">
+      <div class="card">
+          <div class="card-image">
+              <img [src]="prod.foto" class="responsive-img">
+              <span class="card-title red-text"></span>
+              <a (click)="addCarrinho(prod.id)" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+          </div>
+          <div class="card-content">
+              <blockquote>
+                  <p>{{prod.nome}} </p>
+                  <p class="red-text">R$ {{prod.valor}}</p>
+              </blockquote>
+          </div>
+      </div>
+  </div>
+</div>
