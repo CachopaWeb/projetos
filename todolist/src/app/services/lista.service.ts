@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Lista } from '../entities/lista';
+import { nullSafeIsEquivalent } from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -30,16 +31,20 @@ export class ListaService {
     this.lista.nome = vNome;
     this.lista.senha = vSenha;
     console.log(this.lista);
-    this.listaItem.push(this.lista);
+    this.listaItem.set('/'+this.lista.id, this.lista);
   }
 
-  acessarLista($key, senha : string) : boolean{
+  acessarLista(senha : string) : number{
+    var id : number = 0;
     this.getItem().snapshotChanges()
-    .subscribe(a =>{
-      a.forEach(item =>{
-        this.acesso = (item.payload.val().senha == senha);
-      });
-    });
-    return this.acesso;
+    .subscribe(item => {
+        item.map(mp =>{
+          if (mp.payload.val().senha == senha){
+            id = mp.payload.val().id;
+          }
+        })
+      }
+    );
+    return id;
   }
 }

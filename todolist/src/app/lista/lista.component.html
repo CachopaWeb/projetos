@@ -20,7 +20,7 @@
     <input type="button" class="btn" value="Gravar" (click)="addLista(nome.value, senha.value)">
   </div>  
 </div>
-<div class="card-panel">
+<div class="card-panel" *ngIf="itens$ | async as itens else loading">
     <ul class="collection with-header">
       <li class="collection-header"><h4>Listas Criadas</h4></li>  
       <li *ngFor="let item of itens" class="collection-item">
@@ -33,6 +33,11 @@
       </li>
     </ul>
 </div>
+<ng-template #loading>
+  <div class="card-panel">
+  <span>Carregando...</span>
+  </div>
+</ng-template>
 <!-- Modal Structure -->
 <div id="modal1" class="modal">
   <div class="modal-content">

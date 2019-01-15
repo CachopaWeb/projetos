@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoService } from '../services/todo.service';
-import { RouterLinkActive } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Item } from '../entities/item';
 
 @Component({
   selector: 'app-todo',
@@ -9,25 +10,21 @@ import { RouterLinkActive } from '@angular/router';
   providers:[TodoService]
 })
 export class TodoComponent implements OnInit {
-  itens : any[] = [];
-  constructor(private todoService : TodoService, private route : RouterLinkActive) { }
+  itens : Item[] = [];
+  id : string;
+  constructor(private todoService : TodoService, private route : ActivatedRoute) { }
 
   ngOnInit() {
-    this.todoService.getItem().snapshotChanges()
-    .subscribe(i =>{
-      this.itens = [];
-      i.forEach(el => {
-        let x = el.payload.toJSON();
-        x["$key"] = el.key;
-        this.itens.push(x);
+    this.id  = this.route.snapshot.paramMap.get('id');
+    this.todoService.getItem(this.id.toString()).map(
+      item =>{
+        if (item.idLista.toString() == this.id.toString())
+          this.itens.push(item);
       });
-    });
-    this.itens.sort((a, b) =>{
-      return a.checado - b.checado;
-    });
   }
+
   addItem(itemTitulo){
-    this.todoService.setItem(itemTitulo.value, 1);
+    this.todoService.setItem(itemTitulo.value, this.id);
     itemTitulo.value = null;
   }
 
