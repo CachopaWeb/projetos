@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ListaService } from '../services/lista.service';
 import { Router } from '@angular/router';
+import { Lista } from '../entities/lista';
 
 @Component({
   selector: 'app-lista',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./lista.component.scss']
 })
 export class ListaComponent implements OnInit {
-  itens : any[] = [];
+  itens : Lista[] = [];
   nova_lista : boolean;
   constructor(private listaService : ListaService, private route : Router) { }
 
@@ -17,24 +18,21 @@ export class ListaComponent implements OnInit {
     .subscribe(i =>{
       this.itens = [];
       i.forEach(el => {
-        let x = el.payload.toJSON();
-        x["$key"] = el.key;
-        this.itens.push(x);
+        this.itens.push(el.payload.val());
       });
     });
     this.itens.sort((a, b) =>{
-      return a.checado - b.checado;
+      return a.id - b.id;
     });
   }
-  addLista(nome, senha : string, id : number){
-    this.listaService.setItem(nome, senha, id);
+  addLista(nome, senha : string){
+    this.listaService.setItem(nome, senha);
     this.nova_lista = false;
   }
 
   AcessoLista($key, senha : string){
     // if (this.listaService.acessarLista($key, senha)){
-      console.log('aqui..');
-      this.route.navigate(['/todo', senha]);
+      this.route.navigateByUrl('/todo');
     // }
   }
 }

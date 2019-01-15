@@ -6,8 +6,10 @@ import { Lista } from '../entities/lista';
   providedIn: 'root'
 })
 export class ListaService {
-  private listaItem : AngularFireList<Lista>;
+  listaItem : AngularFireList<Lista>;
   acesso: boolean;
+  lastId: number = 0;
+  lista: Lista;
   constructor(private db : AngularFireDatabase) { 
     this.listaItem = this.db.list('/lista');
   }
@@ -16,12 +18,19 @@ export class ListaService {
     return this.listaItem;
   }
 
-  setItem(vNome, vSenha : string, vId : number){
-    this.listaItem.push({
-      id:vId++,
-      nome:vNome,
-      senha:vSenha
+  setItem(vNome, vSenha : string){
+    this.listaItem.snapshotChanges()
+    .subscribe(item =>{
+      item.forEach(el =>{
+        this.lastId = this.lastId + el.payload.val().id;
+      })
     });
+    this.lista = new Lista();
+    this.lista.id = this.lastId+1;
+    this.lista.nome = vNome;
+    this.lista.senha = vSenha;
+    console.log(this.lista);
+    this.listaItem.push(this.lista);
   }
 
   acessarLista($key, senha : string) : boolean{
