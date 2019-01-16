@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { Lista } from '../entities/lista';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -40,5 +39,12 @@ export class ListaService {
         return item.payload.val().id;
       }
     })
+  }
+
+  deleteItem(idLista: string){
+    const promisse = this.db.object('/lista/'+idLista).remove();
+    promisse.then(x =>{
+      console.log('deletado com sucesso...')
+    }).catch(e => console.log(e))
   }
 }

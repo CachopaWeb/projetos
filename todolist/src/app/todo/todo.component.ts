@@ -13,19 +13,22 @@ import { Observable } from 'rxjs';
 export class TodoComponent implements OnInit {
   itens : any[] = [];
   id : string;
+  inserir : boolean = false;
   constructor(private todoService : TodoService, 
-              private route : ActivatedRoute,
-              private rota : Router) { }
+              private route : ActivatedRoute) { }
 
   ngOnInit() {
     this.id  = this.route.snapshot.paramMap.get('id');
     this.todoService.getItem(this.id).snapshotChanges()
     .subscribe(item =>{
+      this.itens = [];
       item.forEach(el =>{
         var x = el.payload.toJSON();
-        x['$key'] = el.key;
-        console.log(x);
-        this.itens.push(x)
+        if (x){
+          x['$key'] = el.key;
+          console.log(x);
+          this.itens.push(x)
+        }
       })
     })
   }
@@ -33,15 +36,16 @@ export class TodoComponent implements OnInit {
   addItem(itemTitulo){
     this.todoService.setItem(itemTitulo.value, this.id);
     itemTitulo.value = null;
+    this.inserir = false;
   }
 
   alterCheck($key: string, idLista: string, isChecked : boolean){
     this.todoService.checkOrUnCheck($key, idLista, !isChecked);
-    this.rota.navigate(['/todo', idLista]);
+    // window.location.reload();
   }
 
   delete($key : string, idLista: string){
     this.todoService.deleteItem($key, idLista);
-    this.rota.navigate(['/todo', idLista]);
+    // window.location.reload();
   }
 }

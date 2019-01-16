@@ -3,6 +3,8 @@ import { ListaService } from '../services/lista.service';
 import { Router } from '@angular/router';
 import { Lista } from '../entities/lista';
 import { Observable } from 'rxjs';
+import { TodoService } from '../services/todo.service';
+import { Item } from '../entities/item';
 
 @Component({
   selector: 'app-lista',
@@ -11,11 +13,20 @@ import { Observable } from 'rxjs';
 })
 export class ListaComponent implements OnInit {
   itens$: Observable<Lista[]>;
+  todo: Item[];
+  itensLista : Lista[];
   nova_lista : boolean;
-  constructor(private listaService : ListaService, private route : Router) { }
+  id_sel : number;
+  constructor(private listaService : ListaService, private todoService : TodoService, private route : Router) { }
 
   ngOnInit() {
     this.itens$ = this.listaService.getItem().valueChanges();
+    this.itens$.subscribe(item =>{
+      this.itensLista = [];
+      item.forEach(el =>{
+        this.itensLista.push(el);
+      })
+    });
   }
   addLista(nome, senha : string){
     this.listaService.setItem(nome, senha);
@@ -23,14 +34,26 @@ export class ListaComponent implements OnInit {
   }
 
   AcessoLista(senha : string){
-    this.itens$.subscribe(item =>{
+    if (this.itensLista[this.id_sel].senha == senha){
+      this.route.navigate(['/todo', this.itensLista[this.id_sel].id]);
+    }else{
+      alert('Senha incorreta!')
+    }
+  }
+
+  delete(idLista: string){
+    this.todoService.getItem(idLista).snapshotChanges()
+    .subscribe(item =>{
+      this.todo = [];
       item.forEach(el =>{
-        if (el.senha == senha){
-          this.route.navigate(['/todo', el.id]);
-        }else{
-          alert('Senha incorreta!')
-        }
+        this.todo.push(el.payload.val());
       })
+      if (!this.todo){
+        this.listaService.deleteItem(idLista);
+      }else{
+        alert('Delete os itens da lista primeiro!');
+        this.route.navigate(['/todo', this.itensLista[this.id_sel].id]); 
+      }
     })
   }
 }

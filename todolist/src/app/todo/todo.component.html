@@ -2,17 +2,21 @@
   <div class="nav-wrapper">
   </div>
   <div class="nav-content">
-    <div class="row">
-      <div class="input-field col s6">
-        <input id="texto" type="text" class="validate" #itemTitulo>
-        <label for="texto" class="white-text">Escreva aqui</label>
-      </div>     
-    </div>
+    
     <a class="btn-floating btn-large halfway-fab waves-effect waves-light teal">
-      <i class="material-icons" (click)="addItem(itemTitulo)">add</i>
+      <i class="material-icons" (click)="inserir = !inserir">add</i>
     </a>
   </div>
 </nav>
+<div class="card-panel" *ngIf="inserir">
+  <div class="row">
+    <div class="input-field col s6">
+      <input id="texto" type="text" class="validate" #itemTitulo required>
+      <label for="texto" class="white-text">Escreva aqui</label>
+    </div>     
+  </div>
+  <input type="button" class="btn btn-small" (click)="addItem(itemTitulo)" value="Inserir">
+</div>
 <div class="card-panel" *ngIf="itens else loading">
     <table>
       <thead>
