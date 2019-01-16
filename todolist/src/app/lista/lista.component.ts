@@ -48,7 +48,7 @@ export class ListaComponent implements OnInit {
       item.forEach(el =>{
         this.todo.push(el.payload.val());
       })
-      if (!this.todo){
+      if (!this.todo == null){
         this.listaService.deleteItem(idLista);
       }else{
         alert('Delete os itens da lista primeiro!');
