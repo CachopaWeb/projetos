@@ -1,6 +1,6 @@
 export class Item {
-    id : number;
-    titulo : string;
-    checado : boolean;
-    idLista : number;
+    id: number;
+    titulo: string;
+    checado: boolean;
+    idLista: number;
 }

@@ -10,7 +10,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./lista.component.scss']
 })
 export class ListaComponent implements OnInit {
-  itens : Lista[] = [];
   itens$: Observable<Lista[]>;
   nova_lista : boolean;
   constructor(private listaService : ListaService, private route : Router) { }
@@ -24,11 +23,14 @@ export class ListaComponent implements OnInit {
   }
 
   AcessoLista(senha : string){
-    var id = this.listaService.acessarLista(senha);
-    if (id > 0){
-      this.route.navigate(['/todo', id]);
-    }else{
-      alert('Senha incorreta!')
-    }
+    this.itens$.subscribe(item =>{
+      item.forEach(el =>{
+        if (el.senha == senha){
+          this.route.navigate(['/todo', el.id]);
+        }else{
+          alert('Senha incorreta!')
+        }
+      })
+    })
   }
 }

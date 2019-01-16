@@ -1,29 +1,20 @@
 import { Injectable } from '@angular/core';
 import { AngularFireList, AngularFireDatabase } from 'angularfire2/database';
 import { Item } from '../entities/item';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private ListaItem : AngularFireList<Item>;
-  item : Item;
-  lastId : number;
+  ListaItem : AngularFireList<Item>;
+  lastId : number = 0;
   constructor(private db : AngularFireDatabase) { 
-    this.ListaItem = this.db.list('/itens');
+    this.ListaItem = this.db.list('itens');  
   }
 
   getItem(id_lista : string){
-    var lista : Item[];
-    this.ListaItem.snapshotChanges()
-    .subscribe(item =>{
-      item.forEach(el =>{
-        if (el.payload.val().idLista.toString() == id_lista){
-          lista.push(el.payload.val());
-        }
-      })
-    });
-    return lista;
+    return this.ListaItem = this.db.list('itens/'+id_lista);
   }
 
   setItem(titulo:string, lista_id: string){
@@ -33,20 +24,22 @@ export class TodoService {
         this.lastId = this.lastId + el.payload.val().id;
       })
     });
-    this.item = new Item();
-    this.item.id = this.lastId+1;
-    this.item.titulo = titulo;
-    this.item.checado = false;
-    this.item.idLista = Number(lista_id);
-    console.log(this.item);
-    this.ListaItem.set('/'+this.item.id, this.item);
+    this.ListaItem.push({
+    id: this.lastId+1,
+    titulo: titulo,
+    checado: false,
+    idLista: Number(lista_id)});
   }
 
-  checkOrUnCheck($key : string, flag : boolean){
-    this.db.object('/itens/'+$key).update({checado : flag});
+  checkOrUnCheck($key: string, idLista: string, flag : boolean){
+    const itemRef = this.db.object('itens/'+idLista+'/'+$key);
+    itemRef.update({checado : flag});        
   }
 
-  deleteItem($key : string){
-    this.db.object('/itens/'+$key).remove();
+  deleteItem($key: string, idLista: string){
+    const promisse = this.db.object('/itens/'+idLista+'/'+$key).remove();
+    promisse.then(x =>{
+      console.log('deletado com sucesso...')
+    }).catch(e => console.log(e))
   }
 }
