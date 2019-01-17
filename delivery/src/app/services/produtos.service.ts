@@ -13,8 +13,8 @@ export class ProdutosService{
             {id:3, nome:'X-Bacon c/ Calabresa', valor:17.5, pro_emp:2, foto:'assets/imagens/lanche3.jpg'},
             {id:4, nome:'X-Egg', valor:16, pro_emp:2, foto:'assets/imagens/lanche4.jpg'}
         ];
-        if (this.findAll('1').length == 0)
-            this.setProdutos();
+        // if (this.findAll('1').length == 0)
+            // this.setProdutos();
     }
     
     setProdutos(){
@@ -25,31 +25,18 @@ export class ProdutosService{
             }
         }
     }
-    
+
     findAll(emp_id:string){
-        this.produtos = this.FirebaseDB.list('produtos');
-        var p : Produtos[] = [];
-        this.produtos.snapshotChanges()
-        .subscribe(item =>{
-            item.forEach(element =>{
-                if (element.payload.val().pro_emp.toString() == emp_id)
-                    p.push(element.payload.val());            
-            })
-        });
+        let p : Produtos[] = [];
+        for (const prod in this._produtos) {
+            if (this._produtos.hasOwnProperty(prod)) {
+                if(this._produtos[prod].pro_emp.toString() == emp_id){
+                    p.push(this._produtos[prod]);
+                }
+            }
+        }
         return p;
     }
-
-    // findAll(emp_id:string){
-    //     let p : Produtos[] = [];
-    //     for (const prod in this._produtos) {
-    //         if (this._produtos.hasOwnProperty(prod)) {
-    //             if(this._produtos[prod].pro_emp.toString() == emp_id){
-    //                 p.push(this._produtos[prod]);
-    //             }
-    //         }
-    //     }
-    //     return p;
-    // }
 
     find(id:string){
         return this._produtos[this.getSelectedIndex(id)];

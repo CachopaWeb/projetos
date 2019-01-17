@@ -12,20 +12,13 @@ export class EmpresaService{
             {id: 1, nome: 'Lanches e CIA', logo : 'assets/imagens/logotipo-lanchonete.png'},
             {id: 2, nome: 'Pizzas do Pops', logo : 'assets/imagens/logotipo-hanburguer.jpg'}
         ];
-        if (this.findAll().length == 0){
-            this.setEmpresas();
-        }
+        // if (this.findAll().length == 0){
+        //     this.setEmpresas();
+        // }
     }
 
-    findAll():Empresas[]{
-        this.empresas = this.FirebaseDB.list('empresas');
-        var e : Empresas[] = [];
-        this.empresas.snapshotChanges().subscribe(item =>{
-            item.forEach(el =>{
-                e.push(el.payload.val());
-            });
-        });    
-        return e;   
+    findAll(){
+        return this._empresas;
     }
 
     setEmpresas(){
