@@ -24,9 +24,9 @@
     <ul class="collection with-header">
       <li class="collection-header"><h4>Listas Criadas</h4></li>  
       <li *ngFor="let item of itens; index as i" class="collection-item">
-        <div>
+        <div class="card-panel">
           <a href="#modal1" class="modal-trigger" (click)="id_sel = i">
-              <span class="title">({{i+1}}) {{ item.nome }}</span>
+            <span class="badge left">{{i+1}}</span><span class="title">{{ item.nome }}</span>
           </a>
           <a class="btn secondary-content" (click)="delete(item.id)"><i class="material-icons">delete_sweep</i></a>
         </div>

@@ -48,11 +48,11 @@ export class ListaComponent implements OnInit {
       item.forEach(el =>{
         this.todo.push(el.payload.val());
       })
-      if (!this.todo == null){
+      if (this.todo.length == 0){
         this.listaService.deleteItem(idLista);
       }else{
-        alert('Delete os itens da lista primeiro!');
         this.route.navigate(['/todo', this.itensLista[this.id_sel].id]); 
+        alert('Delete os itens da lista primeiro!');
       }
     })
   }
