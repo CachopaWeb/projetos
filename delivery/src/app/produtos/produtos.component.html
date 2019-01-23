@@ -7,7 +7,7 @@
               <a (click)="addCarrinho(prod.id)" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
           </div>
           <div class="card-content">
-              <blockquote>
+                <a (click)="diminuiQtd(prod)" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">remove</i></a><blockquote>
                   <p>{{prod.nome}} </p>
                   <p class="red-text">R$ {{prod.valor}}</p>
               </blockquote>

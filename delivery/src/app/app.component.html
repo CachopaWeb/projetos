@@ -1,28 +1,2 @@
-<nav>
-<div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Delivery</a>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-    <ul class="right hide-on-med-and-down">
-        <li><a [routerLink]="['/empresas']"><i class="material-icons left">cloud</i>Empresas</a></li>
-        <li><a [routerLink]="['/cart']"><i class="material-icons left">shop</i>Carrinho <span class="new badge">{{totalItens}}</span></a></li>
-        <li><a href="#!"><i class="material-icons left">group</i>Sair</a></li>
-    </ul>            
-</div>
-</nav>        
-<ul id="slide-out" class="sidenav">
-<li>
-    <div class="user-view">
-        <div class="background">
-            <img src="assets/imagens/logotipo-lanchonete.png">
-        </div>
-        <a href="#user"><img class="circle" src="assets/imagens/logotipo-hanburguer.jpg"></a>
-        <a href="#name"><span class="white-text name">John Doe</span></a>
-        <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
-    </div>
-</li>
-<li><a [routerLink]="['/empresas']"><i class="material-icons left">cloud</i>Empresas</a></li>
-<li><a [routerLink]="['/cart']"><i class="material-icons left">shop</i>Carrinho <span class="new badge">{{totalItens}}</span></a></li>
-<li class="divider"></li>
-<li><a href="#!"><i class="material-icons left">group</i>Sair</a></li>
-</ul>
+<app-nav-bar></app-nav-bar>
 <router-outlet></router-outlet>

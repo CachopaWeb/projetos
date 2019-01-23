@@ -12,6 +12,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { environment } from '../environments/environment';
     AppComponent,
     EmpresasComponent,
     ProdutosComponent,
-    CartComponent
+    CartComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

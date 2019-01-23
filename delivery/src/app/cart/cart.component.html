@@ -1,12 +1,10 @@
-<div class="container">
-  <h1>Meu Carrinho</h1>
+<div class="container" *ngIf=" ItensCartArray else Carregando">
+  <h4>Meu Carrinho</h4>
   <table>
     <tr>
-      <th>Id</th>
+      <th>#</th>
       <th>Foto</th>
       <th>Nome</th>
-      <th>Quant</th>
-      <th>Valor Unit</th>
       <th>Valor Total</th>
     </tr>
     <tr *ngFor="let x of ItensCartArray">
@@ -14,15 +12,22 @@
       <td>
         <img [src]="x.produto.foto" alt="" width="80px" height="50px">
       </td>
-      <td>{{x.produto.nome}}</td>
-      <td>{{x.quantidade}}</td>
-      <td>{{x.produto.valor}}</td>
-      <td>{{x.produto.valor * x.quantidade}}</td>
+      <td>{{x.produto.nome}}<br />
+                          <span class="red-text">{{ x.quantidade }} X {{ x.produto.valor |  currency:'R$ '}}</span>
+      </td>
+      <td>{{x.produto.valor * x.quantidade | currency:'R$ '}}</td>
+      <td><button (click)="deletaItem(x.$key)"><i class="material-icons">delete</i></button></td>
     </tr>
     <tr>
       <blockquote>
-        <p class="red-text">R$ {{total}}</p>
+        <p class="red-text">{{total | currency:'R$ '}}</p>
       </blockquote>
     </tr>
   </table>
 </div>
+
+<ng-template #carregando>
+  <div>
+    <span><i class="material-icons">cloud</i>Carregando...</span>
+  </div>
+</ng-template>

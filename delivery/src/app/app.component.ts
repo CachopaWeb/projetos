@@ -10,18 +10,10 @@ import { CartService } from './services/cart.service';
 })
 export class AppComponent {
   title = 'delivery';
-  totalItens : number = 0;
   constructor (private cartService : CartService){ }
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.cartService.getItensCart().snapshotChanges()
-    .subscribe(item =>{
-      this.totalItens = 0;
-      item.forEach(el =>{
-        this.totalItens += 1;
-      });
-    });
   }
 }

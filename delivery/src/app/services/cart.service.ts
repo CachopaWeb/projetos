@@ -18,7 +18,14 @@ export class CartService {
     this.Itens.push(item);
   }
 
-  removeItemCart(item : Item){
-    this.Itens.remove(item.produto.id.toString());
+  removeItemCart($key : string){
+    this.Itens.remove($key);
+  }
+
+  reduzQtd(item : any){
+    this.Itens.push({
+      produto : item.produto,
+      quantidade : item.quantidade
+    });
   }
 }
