@@ -19,7 +19,7 @@ export class AppComponent {
     this.cartService.getItensCart().snapshotChanges()
     .subscribe(item =>{
       this.totalItens = 0;
-      item.forEach(el =>{
+      item.forEach(() =>{
         this.totalItens += 1;
       });
     });
