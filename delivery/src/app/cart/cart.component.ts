@@ -32,19 +32,11 @@ export class CartComponent implements OnInit {
         });
         this.total += x.produto.valor * x.quantidade;
       })
-    });
-        // let cart = JSON.parse(localStorage.getItem("cart"));
-    // for(var i = 0; i < cart.length; i++){
-    //   var item = JSON.parse(cart[i]);
-    //   this.itens.push({
-    //     produto: item.produto,
-    //     quantidade: item.quantidade
-    //   });
-    //   this.total += item.produto.valor * item.quantidade;
-    // }
+    });        
   }
   
-  deletaItem($key : string){
-    this.cartService.removeItemCart($key);
+  deletaItem(item: any){
+    this.cartService.removeItemCart(item.$key);
+    this.total -= item.produto.valor * item.produto.quantidade;
   }
 }

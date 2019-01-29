@@ -4,14 +4,54 @@
           <div class="card-image">
               <img [src]="prod.foto" class="responsive-img">
               <span class="card-title red-text"></span>
-              <a (click)="addCarrinho(prod.id)" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
           </div>
           <div class="card-content">
-                <a (click)="diminuiQtd(prod)" class="btn-floating btn-large halfway-fab waves-effect waves-light red"><i class="material-icons">remove</i></a><blockquote>
-                  <p>{{prod.nome}} </p>
-                  <p class="red-text">R$ {{prod.valor}}</p>
+              <blockquote>
+                <p>{{prod.nome}} </p>
+                 <p class="red-text">{{ prod.valor | currency:'R$ '}}</p>
               </blockquote>
+          </div>
+          <div class="card-action">
+            <div class="row center">
+                <div class="col s4">
+                    <a (click)="add(prod)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+                </div>
+                <div class="col s4">
+                    <span style="font-size:20px">{{ prod.quantidade }} x {{ prod.valor | currency:'R$ ' }}</span>
+                    <div class="col s12">
+                        <span class="red-text">Total</span><br />
+                        <span style="font-size:20px">{{ prod.valor * prod.quantidade | currency:'R$ ' }}</span>                    
+                    </div>
+                </div>
+                <div class="col s4">
+                    <a (click)="diminuir(prod)" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">remove</i></a>
+                </div>
+            </div>  
           </div>
       </div>
   </div>
 </div>
+
+<footer class="page-footer">
+<div class="container">
+    <div class="row center">
+        <div class="col l6 s12">
+            <h5 class="white-text">Minha Compra</h5>
+            <div class="row">
+                <h1>{{ total | currency:'R$ ' }}</h1>
+            </div>
+            <div class="row">
+                <p class="grey-text text-lighten-4">
+                    <button class="btn-large" (click)="addCarrinho()">Finalizar Compra</button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer-copyright">
+    <div class="container">
+    © 2018 Copyright Delivery
+    </div>
+</div>
+</footer>
+       

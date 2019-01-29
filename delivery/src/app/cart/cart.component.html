@@ -1,4 +1,4 @@
-<div class="container" *ngIf=" ItensCartArray else Carregando">
+<div class="container" *ngIf=" ItensCartArray else carregando">
   <h4>Meu Carrinho</h4>
   <table>
     <tr>
@@ -16,7 +16,7 @@
                           <span class="red-text">{{ x.quantidade }} X {{ x.produto.valor |  currency:'R$ '}}</span>
       </td>
       <td>{{x.produto.valor * x.quantidade | currency:'R$ '}}</td>
-      <td><button (click)="deletaItem(x.$key)"><i class="material-icons">delete</i></button></td>
+      <td><button (click)="deletaItem(x)"><i class="material-icons">delete</i></button></td>
     </tr>
     <tr>
       <blockquote>
@@ -27,7 +27,7 @@
 </div>
 
 <ng-template #carregando>
-  <div>
-    <span><i class="material-icons">cloud</i>Carregando...</span>
+  <div class="center">
+    <span><i class="material-icons">autorenew</i>Carregando...</span>
   </div>
 </ng-template>
