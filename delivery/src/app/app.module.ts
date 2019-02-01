@@ -13,6 +13,8 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { EnderecoEntregaComponent } from './endereco-entrega/endereco-entrega.component';
+import { TrocoComponent } from './troco/troco.component';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     EmpresasComponent,
     ProdutosComponent,
     CartComponent,
-    NavBarComponent
+    NavBarComponent,
+    EnderecoEntregaComponent,
+    TrocoComponent
   ],
   imports: [
     BrowserModule,
