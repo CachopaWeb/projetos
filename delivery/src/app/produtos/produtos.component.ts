@@ -67,10 +67,10 @@ export class ProdutosComponent implements OnInit {
               this.cartService.addItemCart(item);
               // alert("Adicionado ao carrinho... 1");
             }else{
-              let item : Item = this.cart[index];
-              item.quantidade += 1;
-              this.cart[index] = item;
-              this.cartService.addItemCart(item); 
+              let pro_item : Item = this.cart[index];
+              pro_item.quantidade += 1;
+              this.cart[index] = pro_item;
+              this.cartService.addItemCart({produto:item.produto, quantidade:pro_item.quantidade}); 
               // alert("Adicionado ao carrinho...2");
             }
           }
@@ -81,14 +81,14 @@ export class ProdutosComponent implements OnInit {
   }
 
   add(item : Produtos){
-    item.quantidade = item.quantidade+1;
-    this.total = this.total + (item.quantidade * item.valor);
+    item.quantidade += 1;
+    this.total +=  item.valor;
   }
 
   diminuir(item : Produtos){
-    item.quantidade = item.quantidade-1;
-    if (item.quantidade < 0)
-      item.quantidade = 0;
-    this.total = this.total - (item.quantidade * item.valor);
+    if (item.quantidade > 0){
+      item.quantidade -= 1;
+      this.total -= item.valor;
+    }
   }
 }
