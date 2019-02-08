@@ -1,14 +1,19 @@
-<div class="container center">
+<div class="row center">
   <div class="col s12 m8 offset-m2 l6 offset-l3">
-    <div class="row">
-      <div class="col s12">
-        <a class="waves-effect waves-light btn-large" [routerLink]="['/endereco-entrega']"><i class="material-icons right">cloud</i>Pagar p/ Entregador</a>
+    <div class="card">
+        <div class="card-title white-text deep-orange accent-4 center">
+            <h4>Formas de pagamento!</h4>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <a class="waves-effect waves-light btn-large white-text blue baixo-botoes" [routerLink]="['/endereco-entrega']"><i class="material-icons right">motorcycle</i>Pagar p/ Entregador</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col s12">
+            <a [routerLink]="['/form']" class="waves-effect waves-light btn-large white-text green baixo-botoes"><i class="material-icons right">credit_card</i>Pagar com Cartão</a>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="row">
-      <div class="col s12">
-        <a [routerLink]="['/form']" class="waves-effect waves-light btn-large"><i class="material-icons right">credit_card</i>Pagar c/ Cartão</a>
-      </div>
-    </div>
-  </div>
 </div>
