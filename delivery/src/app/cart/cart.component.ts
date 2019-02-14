@@ -9,9 +9,8 @@ import { CartService } from '../services/cart.service';
   providers:[CartService]
 })
 export class CartComponent implements OnInit {
-  public itens : Item[] = [];
   public total : number = 0;
-  public ItensCartArray : any[];
+  public ItensCartArray: Item[] = [];
   constructor(private cartService : CartService) {  }
 
   ngOnInit() {
@@ -19,12 +18,13 @@ export class CartComponent implements OnInit {
   }
   carregarCarrinho() : void {
     this.total = 0;
-    this.itens = [];
-    this.cartService.getItensCart()
-    .forEach(el =>{
-      this.itens.push(el);
-      this.total += el.produto.valor * el.quantidade;
-    });        
+    let itens = this.cartService.getItensCart();
+    if (itens != null){
+      itens.forEach(el =>{
+        this.ItensCartArray.push(el);
+        this.total += el.produto.valor * el.quantidade;
+      });        
+    }
   }
   
   deletaItem(item: any){

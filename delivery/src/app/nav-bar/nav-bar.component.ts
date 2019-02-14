@@ -13,9 +13,11 @@ export class NavBarComponent implements OnInit {
   ngOnInit() {
     let item = this.cartService.getItensCart()
     this.totalItens = 0;
-    item.forEach(() =>{
+    if (item != null){
+      item.forEach(() =>{
       this.totalItens += 1;
-    });
+     });
+    }
   }
 
 }

@@ -12,8 +12,8 @@ export class CartService {
 
   getItensCart(){
     // this.Itens = this.FirebaseDb.list("cart");
+    this.Itens = [];
     this.Itens = JSON.parse(localStorage.getItem('cart'));
-    console.log(this.Itens);
     return this.Itens;  
   }
 
