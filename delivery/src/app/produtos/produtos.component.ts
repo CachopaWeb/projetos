@@ -26,9 +26,17 @@ export class ProdutosComponent implements OnInit {
         this.produtos = this.produtoService.findAll(id);
       }
     });
-    this.cart = this.cartService.getItensCart();
-    if (this.cart = null){
-      this.cart = [];
+    let itens = this.cartService.getItensCart();
+    if (itens != null) {
+      itens.forEach(el =>{
+          this.cart.push(el);
+          this.total +=  el.produto.valor * el.produto.quantidade;
+          this.produtos.forEach(prod => {
+            if (prod.id == el.produto.id){
+              prod.quantidade = el.produto.quantidade;
+            }
+          });
+        });
     }
   }
 

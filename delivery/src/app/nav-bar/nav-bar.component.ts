@@ -11,7 +11,13 @@ export class NavBarComponent implements OnInit {
   constructor(private cartService : CartService) { }
 
   ngOnInit() {
-    this.totalItens = this.cartService.getItensCart().length;    
+    let item = this.cartService.getItensCart()
+    this.totalItens = 0;
+    if (item != null){
+      item.forEach((el) =>{
+        this.totalItens += 1;
+      });
+    }
   }
 
 }
