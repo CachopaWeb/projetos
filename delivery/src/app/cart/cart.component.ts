@@ -20,19 +20,10 @@ export class CartComponent implements OnInit {
   carregarCarrinho() : void {
     this.total = 0;
     this.itens = [];
-    this.cartService.getItensCart().snapshotChanges()
-    .subscribe(item =>{
-      this.ItensCartArray = [];
-      item.forEach(element =>{
-        var x = element.payload.val();
-        this.ItensCartArray.push({
-          produto : x.produto,
-          quantidade: x.quantidade,
-          $key : element.key        
-        });
-        this.total += x.produto.valor * x.quantidade;
-      })
-    });        
+    this.ItensCartArray = this.cartService.getItensCart();
+    this.ItensCartArray.forEach(el => {
+      this.total += el.produto.valor * el.quantidade;
+    });
   }
   
   deletaItem(item: any){

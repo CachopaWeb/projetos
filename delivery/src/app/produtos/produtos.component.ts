@@ -26,17 +26,10 @@ export class ProdutosComponent implements OnInit {
         this.produtos = this.produtoService.findAll(id);
       }
     });
-    this.cartService.getItensCart().snapshotChanges()
-    .subscribe(item =>{
-      item.forEach(element =>{
-        var x = element.payload.val();
-        this.cart.push({
-          produto : x.produto,
-          quantidade : x.quantidade,
-          $key : element.key
-        });
-      })
-    });
+    this.cart = this.cartService.getItensCart();
+    if (this.cart = null){
+      this.cart = [];
+    }
   }
 
   addCarrinho()
