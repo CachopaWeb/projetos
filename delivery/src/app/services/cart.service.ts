@@ -6,20 +6,28 @@ import { Item } from '../entities/item';
   providedIn: 'root'
 })
 export class CartService {
-  Itens : AngularFireList<Item>;
-  constructor(private FirebaseDb : AngularFireDatabase) { }
+  // Itens : AngularFireList<Item>;
+  Itens : any[] = [];
+  // constructor(private FirebaseDb : AngularFireDatabase) { }
 
   getItensCart(){
-    this.Itens = this.FirebaseDb.list("cart");
+    // this.Itens = this.FirebaseDb.list("cart");
+    this.Itens = JSON.parse(localStorage.getItem('cart'));
+    console.log(this.Itens);
     return this.Itens;  
   }
 
-  addItemCart(item : Item){
-    this.Itens.push(item);
+  addItemCart(item : any){
+    this.Itens.push({
+      produto : item.produto,
+      quantidade : item.quantidade
+    });
+    localStorage.setItem('cart', JSON.stringify(this.Itens));
   }
 
   removeItemCart($key : string){
-    this.Itens.remove($key);
+    // this.Itens.remove($key);
+    this.Itens.slice(1, 2);
   }
 
   reduzQtd(item : any){
