@@ -11,13 +11,13 @@ export class NavBarComponent implements OnInit {
   constructor(private cartService : CartService) { }
 
   ngOnInit() {
-    this.cartService.getItensCart().snapshotChanges()
-    .subscribe(item =>{
-      this.totalItens = 0;
-      item.forEach(() =>{
+    let item = this.cartService.getItensCart()
+    this.totalItens = 0;
+    if (item != null){
+      item.forEach((el) =>{
         this.totalItens += 1;
       });
-    });
+    }
   }
 
 }

@@ -26,17 +26,18 @@ export class ProdutosComponent implements OnInit {
         this.produtos = this.produtoService.findAll(id);
       }
     });
-    this.cartService.getItensCart().snapshotChanges()
-    .subscribe(item =>{
-      item.forEach(element =>{
-        var x = element.payload.val();
-        this.cart.push({
-          produto : x.produto,
-          quantidade : x.quantidade,
-          $key : element.key
+    let itens = this.cartService.getItensCart();
+    if (itens != null) {
+      itens.forEach(el =>{
+          this.cart.push(el);
+          this.total +=  el.produto.valor * el.produto.quantidade;
+          this.produtos.forEach(prod => {
+            if (prod.id == el.produto.id){
+              prod.quantidade = el.produto.quantidade;
+            }
+          });
         });
-      })
-    });
+    }
   }
 
   addCarrinho()
