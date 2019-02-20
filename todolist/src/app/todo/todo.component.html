@@ -34,7 +34,7 @@
             <td>
               <label>
                 <input type="checkbox" [(ngModel)]="item.checado" (click)="alterCheck(item.$key, item.idLista, item.ckecado)" />
-                <span>Ok</span>
+                <span *ngIf="item.checado">Ok</span>
               </label>
             </td> 
             <td>
