@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CadProdutoService } from '../servicos/cad-produto.service';
+import { Produtos } from '../models/produto';
 
 @Component({
   selector: 'app-cadastro-produto',
@@ -9,6 +10,7 @@ import { CadProdutoService } from '../servicos/cad-produto.service';
 })
 export class CadastroProdutoComponent implements OnInit {
   cadProduto: FormGroup;
+  @Output() produtos: Produtos[] = [];
   constructor(private cadProdutoService: CadProdutoService) { }
 
   ngOnInit() {
@@ -22,11 +24,13 @@ export class CadastroProdutoComponent implements OnInit {
  
   onSubmit(){
     //todo gravar produto com servico
-    this.cadProdutoService.adicionarProduto({id:1, 
-                                             nome:this.cadProduto.value.nome, 
-                                             valor:this.cadProduto.value.valor,
-                                             quantidade:this.cadProduto.value.quantidade,
-                                             foto:this.cadProduto.value.foto,
-                                            pro_emp:1});
+    this.produtos.push(
+      new Produtos(1, 
+                   this.cadProduto.value.nome,
+                   this.cadProduto.value.valor,
+                   1,
+                   this.cadProduto.value.foto,
+                   this.cadProduto.value.quantidade)
+    );
   }
 }

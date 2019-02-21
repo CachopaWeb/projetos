@@ -1,8 +1,9 @@
 export class Produtos{
-    id: number;
-    nome: string;
-    valor: number;
-    pro_emp : number;
-    foto: string;
-    quantidade: number;
+    constructor(
+        public id: number,
+        public nome: string,
+        public valor: number,
+        public pro_emp : number,
+        public foto: string,
+        public quantidade: number){}
 }

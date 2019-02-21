@@ -8,12 +8,13 @@ import { CadProdutoService } from '../servicos/cad-produto.service';
   styleUrls: ['./lista-produtos.component.css']
 })
 export class ListaProdutosComponent implements OnInit {
-  @Input("produtos") lista: Produtos[];
+  @Input() lista: Produtos[] = [];
   constructor(private produtoService: CadProdutoService) { }
 
   ngOnInit() {
     this.produtoService.emitente.subscribe(el =>{
       console.log(el);
+      this.lista = el;
     });
   }
 
