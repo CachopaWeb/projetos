@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Produtos } from '../models/produto';
 import { CadProdutoService } from '../servicos/cad-produto.service';
+import { listChanges } from 'angularfire2/database';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-lista-produtos',
@@ -8,14 +10,18 @@ import { CadProdutoService } from '../servicos/cad-produto.service';
   styleUrls: ['./lista-produtos.component.css']
 })
 export class ListaProdutosComponent implements OnInit {
-  @Input() lista: Produtos[] = [];
+  lista: Produtos[];
   constructor(private produtoService: CadProdutoService) { }
 
   ngOnInit() {
-    this.produtoService.emitente.subscribe(el =>{
-      console.log(el);
-      this.lista = el;
-    });
+    this.produtoService.getProduto().snapshotChanges()
+    .subscribe(el =>{
+      this.lista = [];
+      el.forEach(item =>{
+        // console.log('itens = '+item.payload.val().nome);
+        this.lista.push(item.payload.val());
+      })
+    });  
   }
 
 }

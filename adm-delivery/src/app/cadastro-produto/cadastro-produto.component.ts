@@ -10,7 +10,7 @@ import { Produtos } from '../models/produto';
 })
 export class CadastroProdutoComponent implements OnInit {
   cadProduto: FormGroup;
-  @Output() produtos: Produtos[] = [];
+  produtos: Produtos[] = [];
   constructor(private cadProdutoService: CadProdutoService) { }
 
   ngOnInit() {
@@ -24,7 +24,7 @@ export class CadastroProdutoComponent implements OnInit {
  
   onSubmit(){
     //todo gravar produto com servico
-    this.produtos.push(
+    this.cadProdutoService.adicionarProduto(
       new Produtos(1, 
                    this.cadProduto.value.nome,
                    this.cadProduto.value.valor,
