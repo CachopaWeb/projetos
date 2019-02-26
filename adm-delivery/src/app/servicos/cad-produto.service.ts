@@ -1,16 +1,21 @@
-import { Injectable, Output, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Produtos } from '../models/produto';
+import { AngularFireDatabase, AngularFireList } from 'angularfire2/database';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CadProdutoService {
-  produto: Produtos[];
-  emitente: EventEmitter<Produtos[]> = new EventEmitter();
-  constructor() { }
+  produtos: AngularFireList<Produtos>;
+  constructor(private db: AngularFireDatabase) {
+    this.produtos = this.db.list('produtos');
+   }
+
+  getProduto(){
+    return this.produtos;
+  }
 
   adicionarProduto(p: Produtos){
-    this.produto.push(p);
-    this.emitente.emit(this.produto);
+    this.produtos.push(p);
   }
 }

@@ -18,13 +18,7 @@ import {
 })
 export class CadastroProdutoComponent implements OnInit {
   cadProduto: FormGroup;
-  @Output() produtos: Produtos[] = [];
-  isOpen = true;
-
-  toggle() {
-    this.isOpen = !this.isOpen;
-  }
-  
+  produtos: Produtos[] = [];
   constructor(private cadProdutoService: CadProdutoService) { }
 
   ngOnInit() {
@@ -38,7 +32,7 @@ export class CadastroProdutoComponent implements OnInit {
  
   onSubmit(){
     //todo gravar produto com servico
-    this.produtos.push(
+    this.cadProdutoService.adicionarProduto(
       new Produtos(1, 
                    this.cadProduto.value.nome,
                    this.cadProduto.value.valor,
@@ -47,5 +41,6 @@ export class CadastroProdutoComponent implements OnInit {
                    0,
                    this.cadProduto.value.descricao)
     );
+    this.cadProduto.reset();
   }
 }

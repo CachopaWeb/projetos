@@ -9,6 +9,9 @@ import { LoginComponent } from './login/login.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.component';
 import { ListaProdutosComponent } from './lista-produtos/lista-produtos.component';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 
 @NgModule({
@@ -22,8 +25,10 @@ import { ListaProdutosComponent } from './lista-produtos/lista-produtos.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.config, 'fcc-book-trading'),
+    AngularFireDatabaseModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })
