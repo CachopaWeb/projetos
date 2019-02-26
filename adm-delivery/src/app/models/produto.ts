@@ -5,5 +5,6 @@ export class Produtos{
         public valor: number,
         public pro_emp : number,
         public foto: string,
-        public quantidade: number){}
+        public quantidade: number,
+        public descricao: string){}
 }

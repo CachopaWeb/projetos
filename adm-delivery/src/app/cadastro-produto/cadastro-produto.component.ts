@@ -2,23 +2,37 @@ import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { CadProdutoService } from '../servicos/cad-produto.service';
 import { Produtos } from '../models/produto';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+  // ...
+} from '@angular/animations';
 
 @Component({
   selector: 'app-cadastro-produto',
   templateUrl: './cadastro-produto.component.html',
-  styleUrls: ['./cadastro-produto.component.css']
+  styleUrls: ['./cadastro-produto.component.css'],
 })
 export class CadastroProdutoComponent implements OnInit {
   cadProduto: FormGroup;
   @Output() produtos: Produtos[] = [];
+  isOpen = true;
+
+  toggle() {
+    this.isOpen = !this.isOpen;
+  }
+  
   constructor(private cadProdutoService: CadProdutoService) { }
 
   ngOnInit() {
     this.cadProduto = new FormGroup({
       nome: new FormControl(''),
       valor: new FormControl(''),
-      quantidade: new FormControl(''),
-      foto: new FormControl('')
+      foto: new FormControl(''),
+      descricao: new FormControl('')
     });
   }
  
@@ -30,7 +44,8 @@ export class CadastroProdutoComponent implements OnInit {
                    this.cadProduto.value.valor,
                    1,
                    this.cadProduto.value.foto,
-                   this.cadProduto.value.quantidade)
+                   0,
+                   this.cadProduto.value.descricao)
     );
   }
 }
