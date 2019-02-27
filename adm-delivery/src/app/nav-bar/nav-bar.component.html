@@ -6,10 +6,13 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link text-light" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-light" [routerLink]="['/login']">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link text-light" href="#">Cadastro Produtos/Menu</a>
+        <a class="nav-link text-light" [routerLink]="['/cad-produto']">Cadastro Produtos</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" [routerLink]="['/pedidos']">Meus Pedidos</a>
       </li>
     </ul>
   </div>
