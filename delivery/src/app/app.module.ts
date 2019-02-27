@@ -16,11 +16,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { EnderecoEntregaComponent } from './endereco-entrega/endereco-entrega.component';
 import { TrocoComponent } from './troco/troco.component';
 import { FormasPagtoComponent } from './formas-pagto/formas-pagto.component';
-import { FormComponent } from './form/form.component';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
-import { PagamentoService } from './services/pagamento.service';
-import { VariableGlobal } from './services/variable.global.service';
 
 @NgModule({
   declarations: [
@@ -31,8 +28,7 @@ import { VariableGlobal } from './services/variable.global.service';
     NavBarComponent,
     EnderecoEntregaComponent,
     TrocoComponent,
-    FormasPagtoComponent,
-    FormComponent
+    FormasPagtoComponent
   ],
   imports: [
     BrowserModule,
@@ -45,9 +41,7 @@ import { VariableGlobal } from './services/variable.global.service';
   ],
   providers: [
     ProdutosService,
-    EmpresaService,
-    PagamentoService,
-    VariableGlobal
+    EmpresaService
   ],
   bootstrap: [AppComponent]
 })
