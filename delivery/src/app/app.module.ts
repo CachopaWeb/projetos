@@ -17,7 +17,8 @@ import { EnderecoEntregaComponent } from './endereco-entrega/endereco-entrega.co
 import { TrocoComponent } from './troco/troco.component';
 import { FormasPagtoComponent } from './formas-pagto/formas-pagto.component';
 import { HttpClientModule } from '@angular/common/http'
-import { FormsModule } from '@angular/forms'
+import { FormsModule } from '@angular/forms';
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FormsModule } from '@angular/forms'
     AngularFireDatabaseModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    AngularFireStorageModule
   ],
   providers: [
     ProdutosService,

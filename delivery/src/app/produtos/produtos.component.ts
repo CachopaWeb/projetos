@@ -5,6 +5,7 @@ import { ActivatedRoute, RouterLink, Router } from '@angular/router';
 import { Item } from '../entities/item';
 import { CartService } from '../services/cart.service';
 import { element } from '@angular/core/src/render3';
+import { DownloadImgService } from '../download-img.service';
 
 @Component({
   selector: 'app-produtos',
@@ -18,7 +19,8 @@ export class ProdutosComponent implements OnInit {
   constructor(private produtoService : ProdutosService, 
               private cartService : CartService, 
               private route : ActivatedRoute,
-              private rota : Router) {}
+              private rota : Router,
+              private downloagImg: DownloadImgService) {}
   ngOnInit() {
     this.route.params.subscribe(params =>{
       var id = params['id'];
@@ -26,7 +28,12 @@ export class ProdutosComponent implements OnInit {
         this.produtoService.getProdutos().snapshotChanges()
         .subscribe(el =>{
           el.forEach(item =>{
-            this.produtos.push(item.payload.val());
+            let produto = item.payload.val();
+            this.downloagImg.getImagem(produto.url_img)
+            .subscribe(img =>{
+              produto.foto = img;
+              this.produtos.push(produto);
+            });            
           });
         });
       }
