@@ -1,8 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Produtos } from '../models/produto';
 import { CadProdutoService } from '../servicos/cad-produto.service';
-import { listChanges } from 'angularfire2/database';
-import { Observable } from 'rxjs';
+import { DownloadImgService } from '../download-img.service';
 
 @Component({
   selector: 'app-lista-produtos',
@@ -11,7 +10,8 @@ import { Observable } from 'rxjs';
 })
 export class ListaProdutosComponent implements OnInit {
   lista: Produtos[];
-  constructor(private produtoService: CadProdutoService) { }
+  constructor(private produtoService: CadProdutoService,
+              private downloadImg: DownloadImgService) { }
 
   ngOnInit() {
     this.produtoService.getProduto().snapshotChanges()
@@ -19,7 +19,11 @@ export class ListaProdutosComponent implements OnInit {
       this.lista = [];
       el.forEach(item =>{
         // console.log('itens = '+item.payload.val().nome);
-        this.lista.push(item.payload.val());
+        let x: Produtos = item.payload.val();
+        this.downloadImg.getImagem(x.url_img).subscribe(img =>{
+          x.foto = img;
+          this.lista.push(x);
+        });
       })
     });  
   }

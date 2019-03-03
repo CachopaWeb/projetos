@@ -23,7 +23,7 @@
             <input type="text" class="form-control" placeholder="Descrição" formControlName="descricao" required>
           </div>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" formControlName="foto" required>
+            <input type="file" class="custom-file-input" (change)="detectFiles($event)" required>
             <label class="custom-file-label" data-browse="Foto">Imagem do produto</label>
         </div>      
       </div>

@@ -13,7 +13,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { PedidosComponent } from './pedidos/pedidos.component';
-
+import { AngularFireStorageModule } from 'angularfire2/storage';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,8 @@ import { PedidosComponent } from './pedidos/pedidos.component';
     AppRoutingModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.config, 'fcc-book-trading'),
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    AngularFireStorageModule
 ],
   providers: [],
   bootstrap: [AppComponent]

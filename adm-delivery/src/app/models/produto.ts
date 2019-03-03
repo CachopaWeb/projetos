@@ -4,7 +4,8 @@ export class Produtos{
         public nome: string,
         public valor: number,
         public pro_emp : number,
-        public foto: string,
+        public foto: File,
+        public url_img: string,
         public quantidade: number,
         public descricao: string){}
 }
