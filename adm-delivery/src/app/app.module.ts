@@ -11,9 +11,10 @@ import { CadastroProdutoComponent } from './cadastro-produto/cadastro-produto.co
 import { ListaProdutosComponent } from './lista-produtos/lista-produtos.component';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from '@angular/fire';
-import { environment } from 'src/environments/environment';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { AngularFireStorageModule } from 'angularfire2/storage';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -28,9 +29,10 @@ import { AngularFireStorageModule } from 'angularfire2/storage';
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AngularFireModule.initializeApp(environment.config, 'fcc-book-trading'),
+    AngularFireModule.initializeApp(environment.config),
     AngularFireDatabaseModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
 ],
   providers: [],
   bootstrap: [AppComponent]
