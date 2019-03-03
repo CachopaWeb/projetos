@@ -6,7 +6,7 @@ export const environment = {
   production: false,
   config: {
     apiKey: "AIzaSyCEivHYc_QG0L0NuL3SpQUazmBpnfNJOcw",
-    authDomain: "app-delivery-73304.firebaseapp.com",
+    authDomain: "https://adm-delivery.firebaseio.com",
     databaseURL: "https://app-delivery-73304.firebaseio.com",
     projectId: "app-delivery-73304",
     storageBucket: "app-delivery-73304.appspot.com",

@@ -6,7 +6,6 @@ import { CartComponent } from './cart/cart.component';
 import { EnderecoEntregaComponent } from './endereco-entrega/endereco-entrega.component';
 import { TrocoComponent } from './troco/troco.component';
 import { FormasPagtoComponent } from './formas-pagto/formas-pagto.component';
-import { FormComponent } from './form/form.component';
 
 const routes: Routes = [
   {path : 'empresas', component : EmpresasComponent},
@@ -15,7 +14,6 @@ const routes: Routes = [
   {path : 'endereco-entrega', component : EnderecoEntregaComponent},
   {path : 'troco', component : TrocoComponent},
   {path : 'Forma-pagto', component : FormasPagtoComponent},
-  {path : 'form', component : FormComponent},
   {path : '', redirectTo : '/empresas', pathMatch : 'full'}
 ];
 

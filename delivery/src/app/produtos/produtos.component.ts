@@ -12,7 +12,7 @@ import { element } from '@angular/core/src/render3';
   styleUrls: ['./produtos.component.css']
 })
 export class ProdutosComponent implements OnInit {
-  produtos: Produtos[];
+  produtos: Produtos[] = [];
   cart: any[] = [];
   total: number = 0;
   constructor(private produtoService : ProdutosService, 
@@ -23,7 +23,12 @@ export class ProdutosComponent implements OnInit {
     this.route.params.subscribe(params =>{
       var id = params['id'];
       if(id != "0"){
-        this.produtos = this.produtoService.findAll(id);
+        this.produtoService.getProdutos().snapshotChanges()
+        .subscribe(el =>{
+          el.forEach(item =>{
+            this.produtos.push(item.payload.val());
+          });
+        });
       }
     });
     let itens = this.cartService.getItensCart();
