@@ -12,6 +12,8 @@ import { ListaProdutosComponent } from './lista-produtos/lista-produtos.componen
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { PedidosComponent } from './pedidos/pedidos.component';
+
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { environment } from 'src/environments/environment';
     LoginComponent,
     NavBarComponent,
     CadastroProdutoComponent,
-    ListaProdutosComponent
+    ListaProdutosComponent,
+    PedidosComponent
   ],
   imports: [
     BrowserModule,

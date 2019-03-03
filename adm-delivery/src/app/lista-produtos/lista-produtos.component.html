@@ -8,15 +8,15 @@
         <tr>
           <td>#</td>
           <td>Nome</td>
-          <td>Quantidade</td>
           <td>Valor</td>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of lista" >
           <td>{{ item.id }}</td>
-          <td>{{ item.nome }}</td>
-          <td>{{ item.quantidade }}</td>
+          <td>{{ item.nome }}<br />
+              {{ item.descricao}}
+          </td>
           <td>{{ item.valor }}</td>
         </tr>
       </tbody>

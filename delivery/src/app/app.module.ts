@@ -18,8 +18,6 @@ import { TrocoComponent } from './troco/troco.component';
 import { FormasPagtoComponent } from './formas-pagto/formas-pagto.component';
 import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
-import { PagamentoService } from './services/pagamento.service';
-import { VariableGlobal } from './services/variable.global.service';
 
 @NgModule({
   declarations: [
@@ -43,9 +41,7 @@ import { VariableGlobal } from './services/variable.global.service';
   ],
   providers: [
     ProdutosService,
-    EmpresaService,
-    PagamentoService,
-    VariableGlobal
+    EmpresaService
   ],
   bootstrap: [AppComponent]
 })
