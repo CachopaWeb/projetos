@@ -27,6 +27,7 @@ export class ProdutosComponent implements OnInit {
       if(id != "0"){
         this.produtoService.getProdutos().snapshotChanges()
         .subscribe(el =>{
+          this.produtos = [];
           el.forEach(item =>{
             let produto = item.payload.val();
             this.downloagImg.getImagem(produto.url_img)
