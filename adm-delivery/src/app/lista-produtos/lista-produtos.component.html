@@ -20,6 +20,7 @@
               {{ item.descricao}}
           </td>
           <td>{{ item.valor | currency:'R$ ' }}</td>
+          <td><button class="btn btn-danger" (click)="delete(item.$key)">Excluir</button></td>
         </tr>
       </tbody>
     </table>

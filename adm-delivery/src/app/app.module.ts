@@ -15,6 +15,7 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { ItensPedidoComponent } from './pedidos/itens-pedido/itens-pedido.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { environment } from '../environments/environment';
     NavBarComponent,
     CadastroProdutoComponent,
     ListaProdutosComponent,
-    PedidosComponent
+    PedidosComponent,
+    ItensPedidoComponent
   ],
   imports: [
     BrowserModule,

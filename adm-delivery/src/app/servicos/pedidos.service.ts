@@ -14,4 +14,9 @@ export class PedidosService {
   getPedidos(){
     return this.pedidos;
   }
+
+  RespostaAceite($key: any, resposta: boolean){
+    console.log($key, resposta)
+    this.db.object('/pedidos/'+$key).update({aceito:resposta});
+  }
 }

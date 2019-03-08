@@ -4,11 +4,30 @@
   </div>
   <div class="card-body">
     <div class="row">
-      <ul>
-        <li *ngFor="let pedido of pedidos">
-          {{ pedido.itens | json }}
+      <ul class="list-group d-flex w-100 justify-content-between">
+        <li class="list-group-item" *ngFor="let pedido of pedidos">
+          <a (click)="onSelect(pedido.itens)" 
+            [class.list-group-item-success]="pedido.aceito === true" 
+            class="list-group-item list-group-item-action"
+            [class.list-group-item-danger]="pedido.aceito === false">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">Cliente: Consumidor</h5>
+              <small class="text-muted">{{ pedido.data | date:'dd MMM yyyy' }}</small>
+              <div class="row">
+                  <div class="col col-md6">
+                      <button (click)="aceite(pedido)" class="btn btn-success">Aceitar</button>
+                  </div>
+                  <div class="col col-md6">
+                    <button (click)="aceite(pedido)" class="btn btn-danger">Rejeitar</button>
+                  </div>
+              </div>
+            </div>
+            <p class="mb-1">End. Entrega: {{ pedido.end_entrega}}</p>
+            <small class="text-muted">Obs.: {{ pedido.obs }}</small>
+          </a>  
         </li>
       </ul>
     </div>
   </div>
 </div>
+<app-itens-pedido [lista]="selectedItem"></app-itens-pedido>

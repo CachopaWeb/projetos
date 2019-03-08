@@ -25,4 +25,13 @@ export class CadProdutoService {
     this.task = this.ref.put(p.foto);
     this.produtos.push(p);
   }
+
+  excluir(key: any){
+    this.db.object('/produtos/'+key)
+    .remove()
+    .then(
+      ()=>{console.log('deletado com sucesso')},
+      (error)=>{console.log(error)}
+    );
+  }
 }

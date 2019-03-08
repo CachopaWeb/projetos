@@ -9,7 +9,7 @@ import { DownloadImgService } from '../download-img.service';
   styleUrls: ['./lista-produtos.component.css']
 })
 export class ListaProdutosComponent implements OnInit {
-  lista: Produtos[];
+  lista: any[];
   constructor(private produtoService: CadProdutoService,
               private downloadImg: DownloadImgService) { }
 
@@ -19,13 +19,18 @@ export class ListaProdutosComponent implements OnInit {
       this.lista = [];
       el.forEach(item =>{
         // console.log('itens = '+item.payload.val().nome);
-        let x: Produtos = item.payload.val();
+        let x: any = item.payload.val();
         this.downloadImg.getImagem(x.url_img).subscribe(img =>{
           x.foto = img;
+          x.$key = item.key;
           this.lista.push(x);
         });
       })
     });  
   }
 
+  delete($key: any){
+    console.log($key);
+    this.produtoService.excluir($key);
+  }
 }
